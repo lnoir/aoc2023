@@ -1,14 +1,14 @@
 import { loadLinesFromFile } from "../helpers";
 
-type GameRound = {
+export type ColourSet = {
   red: number,
   blue: number,
   green: number,
 }
 
-type GameRecord = {
+export type GameRecord = {
   id: number,
-  rounds: GameRound[]
+  rounds: ColourSet[]
 }
 
 type ColourConfig = {
@@ -27,7 +27,7 @@ export function parseLine(line: string): GameRecord {
   const [head, tail] = line.split(':');
   const id = Number(head.match(/\d+/)?.[0]);
   const rounds: any = tail?.trim().split(';').map(round => {
-    const counts = round.trim().split(',').reduce((prev: GameRound, colourCount: string) => {
+    const counts = round.trim().split(',').reduce((prev: ColourSet, colourCount: string) => {
       const [count, colour] = colourCount.trim().split(/\s+/);
       return {...prev, [colour]: Number(count)}
     }, {red: 0, green: 0, blue: 0});
@@ -46,7 +46,7 @@ export function filterOutImpossibleGames(games: GameRecord[], config: GameConfig
   return filtered;
 }
 
-export function getSolution(file?: string): number {
+export function getSolutionA(file?: string): number {
   const games = loadLinesFromFile(file || './02/02.input.txt').map(line => parseLine(line));
   const possible = filterOutImpossibleGames(games, defaultConfig);
   // Sum of IDs of possible games
