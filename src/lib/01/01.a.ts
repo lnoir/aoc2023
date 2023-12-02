@@ -8,7 +8,7 @@ export function extractValueByFirstLastDigit(line: string): number {
   return num;
 }
 
-export function getSolution(): number {
+export function getSolutionA(): number {
   const lines = loadLinesFromFile('./01/01.input.txt');
   const result = lines
     .map(line => extractValueByFirstLastDigit(line))

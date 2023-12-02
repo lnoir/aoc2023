@@ -49,7 +49,6 @@ export function filterOutImpossibleGames(games: GameRecord[], config: GameConfig
 export function getSolutionA(file?: string): number {
   const games = loadLinesFromFile(file || './02/02.input.txt').map(line => parseLine(line));
   const possible = filterOutImpossibleGames(games, defaultConfig);
-  // Sum of IDs of possible games
   const sum = possible.reduce((total, game) => {
     return total + game.id
   }, 0);

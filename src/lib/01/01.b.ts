@@ -44,7 +44,7 @@ export function getLineValue(line: string): number {
   return Number(first + (last || first));
 }
 
-export function getSolution(file?: string): number {
+export function getSolutionB(file?: string): number {
   const lines = loadLinesFromFile(file || './01/01.input.txt');
   const result = lines
     .map(line => getLineValue(line))

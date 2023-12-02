@@ -14,7 +14,6 @@ describe('Day 2', () => {
     test('filterOutImpossibleGames', () => {
       const games = loadLinesFromFile('./02/02.input.test.txt').map(line => parseLine(line));
       const filtered = filterOutImpossibleGames(games, {red: {max: 12}, green: {max: 13}, blue: {max: 14}});
-      console.log(JSON.stringify(filtered, null, 2));
       expect(filtered).toHaveLength(3);
     });
   
