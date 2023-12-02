@@ -8,7 +8,7 @@ describe('Day 1', () => {
     expect(result).toBe(45);
   });
 
-  test('part two', () => {
+  test('Part B: getSolution for test data', () => {
     expect(getSolutionB('./01/01.input.test.txt')).toBe(281);
   });
 
