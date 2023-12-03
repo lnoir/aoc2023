@@ -26,7 +26,6 @@ describe('Day 2', () => {
     });
   })
 
-
   describe('Part B', () => {
     let games: GameRecord[];
 
