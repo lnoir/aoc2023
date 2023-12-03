@@ -44,8 +44,8 @@ export function getLineValue(line: string): number {
   return Number(first + (last || first));
 }
 
-export function getSolutionB(file?: string): number {
-  const lines = loadLinesFromFile(file || './01/01.input.txt');
+export function getSolutionB(file = './01/01.input.txt'): number {
+  const lines = loadLinesFromFile(file);
   const result = lines
     .map(line => getLineValue(line))
     .reduce((prev: number, curr: number) => {
