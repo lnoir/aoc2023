@@ -33,7 +33,6 @@ export function compareLinesAndReturnSymbolAdjacentNumbers(current: string, prev
       }
     }
   }
-  console.log('@adj', adjacent)
   return adjacent;
 }
 

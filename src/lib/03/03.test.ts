@@ -2,6 +2,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { loadLinesFromFile } from '../helpers';
 import { compareLinesAndReturnSymbolAdjacentNumbers, getPartNumbers, getSolutionA, getValuesFromLine } from './03.a';
 import { NumberRegExp, SymbolRegExp } from './03.constants';
+import { getSolutionB } from './03.b';
 
 describe('Day 3', () => {
   let testInput: string[];
@@ -43,6 +44,17 @@ describe('Day 3', () => {
 
     test('getSolution', () => {
       console.log(getSolutionA());
+    });
+  });
+
+  describe('Part B', () => {
+
+    test('getSolution for test data', () => {
+      expect(getSolutionB('./03/03.input.test.txt')).toBe(467835);
+    });
+
+    test('getSolution', () => {
+      console.log(getSolutionB());
     });
   });
 });
