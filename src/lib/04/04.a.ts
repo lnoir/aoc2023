@@ -1,7 +1,7 @@
 import { loadLinesFromFile } from "../helpers";
 
 type CardValueType = 'card' | 'player';
-type NumberData = {
+export type NumberData = {
   card: number[];
   player: number[];
 }

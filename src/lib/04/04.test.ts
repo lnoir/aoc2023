@@ -1,6 +1,7 @@
 import { beforeAll, describe, expect, test } from 'vitest';
 import { loadLinesFromFile } from '../helpers';
 import { getSolutionA, getLineValues, getCardValue } from './04.a';
+import { getSolutionB } from './04.b';
 
 describe('Day 4', () => {
   let testFile = './04/04.input.test.txt';
@@ -32,6 +33,16 @@ describe('Day 4', () => {
 
     test('getSolution', () => {
       console.log(getSolutionA());
+    });
+  });
+
+  describe('Part B', () => {
+    test('getSolution for test input', () => {
+      expect(getSolutionB(testFile)).toBe(30);
+    });
+
+    test('getSolution', () => {
+      console.log(getSolutionB());
     });
   });
 });
