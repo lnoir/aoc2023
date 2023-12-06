@@ -4,6 +4,7 @@
   "description": "Advent of Code 2023",
   "main": "index.js",
   "scripts": {
+    "start": "ts-node src/index.ts",
     "test": "vitest"
   },
   "author": "",
@@ -11,5 +12,8 @@
   "devDependencies": {
     "typescript": "^5.3.2",
     "vitest": "^0.34.6"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1"
   }
 }
