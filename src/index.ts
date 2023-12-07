@@ -5,8 +5,8 @@
  */
 import solutions from './lib/index';
 
-const dayIndex = process.argv.indexOf('--days');
-const partIndex = process.argv.indexOf('--parts');
+const dayIndex = process.argv.indexOf('--days') || process.argv.indexOf('--day');
+const partIndex = process.argv.indexOf('--parts') || process.argv.indexOf('--part');
 const inputIndex = process.argv.indexOf('--file');
 const days = dayIndex > -1
   ? process.argv[dayIndex + 1].split(/[,\s]+/g)
