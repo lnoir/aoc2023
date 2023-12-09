@@ -1,7 +1,15 @@
 import { loadLinesFromFile } from "../helpers";
 
+
+export function addOrSubtract(lower: number, upper: number, reverse = false) {
+  if (reverse) {
+    return upper - lower;
+  }
+  return upper + lower;
+}
+
 export function getDeltas(values: number[]) {
-  const deltas = [];
+  const deltas: any[] = [];
   for (let i = 1; i < values.length; i++) {
     deltas.push(values[i] - values[i - 1]);
   }
@@ -23,7 +31,7 @@ export function populateDifferences(arr: any) {
     if (!reachedBottom) continue;
     complete = true;
   }
-  return arr; 
+  return arr;
 }
 
 export function createMultidimensionalArray(lines: string[]) {
@@ -33,30 +41,47 @@ export function createMultidimensionalArray(lines: string[]) {
   return arr;
 }
 
-export function predictNextNumbers(arr: any) {
+export function predictNextNumbers(arr: any, reverse = false) {
   const lastDeltaIndex = arr[1].length - 1;
   const lastValueIndex = arr[0].length - 1;
+  const action = reverse ? 'unshift' : 'push';
   for (let i = lastDeltaIndex - 1; i > -1; i--) {
     const curr = arr[1][i];
     const prev = arr[1][i+1];
+    const currIndex = reverse ? 0 : curr.length - 1;
+    const prevIndex = reverse ? 0 : prev.length - 1;
     switch(i) {
       case lastDeltaIndex:
-        curr.push(0); continue;
+        curr[action](0); continue;
       case lastDeltaIndex - 1:
-        curr.push(curr[curr.length - 1]); continue;
+        curr[action](curr[currIndex]); continue;
       default:
-        curr.push(prev[prev.length - 1] + curr[curr.length - 1]);
+        if (reverse) {
+          curr[action](addOrSubtract(prev[prevIndex], curr[currIndex], reverse));
+        }
+        else {
+          curr[action](addOrSubtract(prev[prevIndex], curr[currIndex]));
+        }
     }
   }
-  arr[0].push(arr[1][0][arr[1][0].length - 1] + arr[0][lastValueIndex]);
-  //console.log(arr)
+  const mainEndVal = arr[0][reverse ? 0 : lastValueIndex];
+  const diffEndVal = arr[1][0][reverse ? 0 : arr[1][0].length - 1];
+  arr[0][action](addOrSubtract(diffEndVal, mainEndVal, reverse));
   return arr;
 }
 
 export function getSolutionA(file = './09/09.input.txt'): number {
   const lines = loadLinesFromFile(file);
   const valueArrays = createMultidimensionalArray(lines);
-  valueArrays.forEach(populateDifferences);
-  valueArrays.forEach(predictNextNumbers);
+  valueArrays.forEach(arr => populateDifferences(arr));
+  valueArrays.forEach(arr => predictNextNumbers(arr));
   return valueArrays.reduce((total, arr) => {return total + arr[0][arr[0].length - 1]}, 0);
+}
+
+export function getSolutionB(file = './09/09.input.txt'): number {
+  const lines = loadLinesFromFile(file);
+  const valueArrays = createMultidimensionalArray(lines);
+  valueArrays.forEach(arr => populateDifferences(arr));
+  valueArrays.forEach(arr => predictNextNumbers(arr, true));
+  return valueArrays.reduce((total, arr) => {return total + arr[0][0]}, 0);
 }

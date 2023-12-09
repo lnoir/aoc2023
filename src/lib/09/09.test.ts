@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { createMultidimensionalArray, getSolutionA, populateDifferences } from './09.a';
+import { createMultidimensionalArray, getSolutionA, getSolutionB, populateDifferences, predictNextNumbers } from './09.a';
 import { loadLinesFromFile } from '../helpers';
 
 describe('Day 8', () => {
@@ -32,10 +32,15 @@ describe('Day 8', () => {
     ]
   ];
 
+  function getPopulatedArrays() {
+    const arrays = createMultidimensionalArray(loadLinesFromFile(testFile));
+    arrays.forEach(arr => populateDifferences(arr));
+    return arrays;
+  }
+
   describe('Part A', () => {
     test('populateDifferences', () => {
-      const arrays = createMultidimensionalArray(loadLinesFromFile(testFile));
-      arrays.forEach(arr => populateDifferences(arr));
+      const arrays = getPopulatedArrays();
       expect(arrays).toMatchObject(multidimensionalArray);
     });
 
@@ -45,6 +50,22 @@ describe('Day 8', () => {
 
     test('getSolution', () => {
       console.log(getSolutionA());
+    });
+  });
+  
+  describe('Part B', () => {
+    test('predictNextNumber', () => {
+      const arrays = getPopulatedArrays();
+      arrays.slice(0, 1).forEach(arr => predictNextNumbers(arr, true));
+      expect(arrays[0][0][0]).toBe(-3);
+    });
+
+    test('getSolution for test input', () => {
+      expect(getSolutionB(testFile)).toBe(2);
+    });
+
+    test('getSolution', () => {
+      console.log(getSolutionB());
     });
   });
 });

@@ -12,6 +12,7 @@ import { getSolutionA as day6a } from "./06/06.a";
 import { getSolutionA as day7a } from "./07/07.a";
 import { getSolutionA as day8a } from "./08/08.a";
 import { getSolutionA as day9a } from "./09/09.a";
+import { getSolutionB as day9b } from "./09/09.a";
 
 const solutions: Record<string, any> = {
   day1a,
@@ -29,7 +30,8 @@ const solutions: Record<string, any> = {
   day7a,
   day7b: () => day7a('./07/07.input.txt', true),
   day8a,
-  day9a
+  day9a,
+  day9b
 };
 
 export default solutions;
